@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stripe Payment Example</title>
+  <script src="https://js.stripe.com/v3/"></script>
+</head>
+<body>
+
+  <button id="checkout-button">Pay</button>
+  <div id="error-message" role="alert"></div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const stripe = Stripe('pk_test_51Of5ItSColr6AwXBjpbjqDmGGm5xBbvPrmXB6tv8Cwlcqh0tMUXbd7hYpiI4tJCP4akYJ8X6huahBOqljzhRSW4900gSRbFRjk');
+      const checkoutButton = document.getElementById('checkout-button');
+      const errorMessage = document.getElementById('error-message');
+
+      checkoutButton.addEventListener('click', function () {
+        // When the customer clicks on the button, redirect them to Checkout.
+        stripe.redirectToCheckout({
+          items: [{sku: 'your_valid_sku', quantity: 1}], // Replace with your valid SKU or product details
+          successUrl: 'http://yourwebsite.com/success', // Redirect to this page on successful payment
+          cancelUrl: 'http://yourwebsite.com/cancel', // Redirect to this page if the customer cancels
+        })
+        .then(function (result) {
+          if (result.error) {
+            // If `redirectToCheckout` fails due to a browser or network error,
+            // display the localized error message to your customer.
+            errorMessage.textContent = result.error.message;
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>
