@@ -1,8 +1,7 @@
 {
   "scripts": {
-  "start": "react-scripts start"
-}
-
+    "start": "node server.js"  // Start Express server
+  },
   "dependencies": {
     "express-async-handler": "^1.2.0",
     "nodemon": "^3.1.7"
