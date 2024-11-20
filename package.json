@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "start": "node server.js"
+    "start": "node Backend/server.js"
   },
   "dependencies": {
     "express-async-handler": "^1.2.0",
